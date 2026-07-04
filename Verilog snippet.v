@@ -40,8 +40,7 @@ endmodule
 
 module gate_logic(a,b,and_out,or_out,nand_out,nor_out,notb_out,xor_out,xnor_out);
    input a,b;
-   output and_out,or_out,nand_out,nor_out;
-   not b_out,xor_out,xnor_out;
+   output and_out,or_out,nand_out,nor_out,notb_out,xor_out,xnor_out;
    and a1 (and_out,a,b);
    or o1(or_out,a,b);
    nand n1(nand_out,a,b);
@@ -155,8 +154,8 @@ endmodule
 //define half subtractor
 
 module half_subtractor( input a,b,output d,bo);
-assign d=a^b;
-assign bo=(~a)&b;
+  assign d=a^b;
+  assign bo=(~a)&b;
 endmodule
 
 //define testbench for tesing the design
