@@ -40,8 +40,8 @@ endmodule
 
 module gate_logic(a,b,and_out,or_out,nand_out,nor_out,notb_out,xor_out,xnor_out);
    input a,b;
-   output and_out,or_out,nand_out,nor_out,not
-   b_out,xor_out,xnor_out;
+   output and_out,or_out,nand_out,nor_out;
+   not b_out,xor_out,xnor_out;
    and a1 (and_out,a,b);
    or o1(or_out,a,b);
    nand n1(nand_out,a,b);
@@ -79,10 +79,10 @@ end
 endmodule
 
 ---------------------------------------------------------------------------------------------------------------------
-// define half module
+// define half adder module
 module half_adder(input a, b, output sum, carry );
-assign sum=a^b;
-assign carry= a&b;
+  assign sum=a^b;
+  assign carry= a&b;
 endmodule
 
 // define the testbench
@@ -103,11 +103,11 @@ endmodule
 ----------------------------------------------------------------------------------------------------------------------------
 //define full adder
 module full_adder(input a,b,c,output sum, carry);
-assign sum= a^b^c;
-assign w1=a&b;
-assign w2=b&c;
-assign w3=a&c;
-assign carry=w1|w2|w3;
+  assign sum= a^b^c;
+  assign w1=a&b;
+  assign w2=b&c;
+  assign w3=a&c;
+  assign carry=w1|w2|w3;
 endmodule
 
 // define testbench of full adder
@@ -131,15 +131,15 @@ endmodule
 ------------------------------------------------------------------------------------------------------------------------------
 // full adder using two half adder
 module full_addr(input a,b,c, output sum, carry);
-half_adder h1(a,b,w1,w2);
-half_adder h2(w1,c,sum,w3);
-assign carry=w2|w3;
+  half_adder h1(a,b,w1,w2);
+  half_adder h2(w1,c,sum,w3);
+  assign carry=w2|w3;
 endmodule
 
 //define the testbench to satisfy design module is correctly working
 module tb3( );
-reg a,b,c; wire sum,carry;
-full_addr uut(a,b,c,sum,carry);
+  reg a,b,c; wire sum,carry;
+  full_addr uut(a,b,c,sum,carry);
 initial
 begin
  for ( integer count = 0; count < 8; count = count + 1)
