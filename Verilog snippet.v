@@ -26,12 +26,12 @@ gate_logic uut(
 );
 initial              // start from here once a while
 begin                // start here
- a=0; b=0; #10       // start with (0,0) with 10ns 
- a=0; b=1; #10       
- a=1; b=0; #10
- a=1; b=1; #10       // start with (1,1) with 40ns 
- a=0; b=0; #10
- $finish;
+a=0; b=0; #10       // start with (0,0) with 10ns 
+a=0; b=1; #10       
+a=1; b=0; #10
+a=1; b=1; #10       // start with (1,1) with 40ns 
+a=0; b=0; #10
+$finish;
 end
 endmodule
 
@@ -68,12 +68,12 @@ data_flow uut(
  );
 initial
 begin
- a=0; b=0; #10
- a=0; b=1; #10
- a=1; b=0; #10
- a=1; b=1; #10
- a=0; b=0; #10
- $finish;
+a=0; b=0; #10
+a=0; b=1; #10
+a=1; b=0; #10
+a=1; b=1; #10
+a=0; b=0; #10
+$finish;
 end
 endmodule
 
