@@ -53,19 +53,19 @@ endmodule
 // Testbench
 
 module tb2( );
-reg a,b;
-wire and_out,or_out,nand_out,nor_out,notb_out,xor_out,xnor_out;
-data_flow uut(
- .a(a),
- .b(b),
- .and_out(and_out),
- .or_out(or_out),
- .notb_out(notb_out),
- .nand_out(nand_out),
- .nor_out(nor_out),
- .xor_out(xor_out),
- .xnor_out(xnor_out)
- );
+   reg a,b;
+   wire and_out,or_out,nand_out,nor_out,notb_out,xor_out,xnor_out;
+   data_flow uut(
+   .a(a),
+   .b(b),
+   .and_out(and_out),
+   .or_out(or_out),
+   .notb_out(notb_out),
+   .nand_out(nand_out),
+   .nor_out(nor_out),
+   .xor_out(xor_out),
+   .xnor_out(xnor_out)
+   );
 initial
 begin
 a=0; b=0; #10
@@ -87,67 +87,67 @@ endmodule
 // define the testbench
 
 module tb1();
-reg a,b; wire sum,carry;
-half_adder uut(a,b,sum,carry);
-initial
-begin
-a=0;b=0; #10
-a=0;b=1; #10
-a=1;b=0; #10
-a=1;b=1;#10
-$finish;
-end
+   reg a,b; wire sum,carry;
+   half_adder uut(a,b,sum,carry);
+   initial
+   begin
+   a=0;b=0; #10
+   a=0;b=1; #10
+   a=1;b=0; #10
+   a=1;b=1;#10
+   $finish;
+   end
 endmodule
 
 ----------------------------------------------------------------------------------------------------------------------------
 //define full adder
 module full_adder(input a,b,c,output sum, carry);
-  assign sum= a^b^c;
-  assign w1=a&b;
-  assign w2=b&c;
-  assign w3=a&c;
-  assign carry=w1|w2|w3;
+   assign sum= a^b^c;
+   assign w1=a&b;
+   assign w2=b&c;
+   assign w3=a&c;
+   assign carry=w1|w2|w3;
 endmodule
 
 // define testbench of full adder
 
 module tb2();
-reg a,b,c; wire sum,carry;
-full_adder uut(a,b,c ,sum,carry);
-initial
-begin
-a=0;b=0;c=0; #10
-a=0;b=0;c=1; #10
-a=0;b=1;c=0; #10
-a=0;b=1;c=1; #10
-a=1;b=0;c=0; #10
-a=1;b=0;c=1; #10
-a=1;b=1;c=0; #10
-a=1;b=1;c=1; #10
-$finish;
-end
+   reg a,b,c; wire sum,carry;
+   full_adder uut(a,b,c ,sum,carry);
+   initial
+   begin
+   a=0;b=0;c=0; #10
+   a=0;b=0;c=1; #10
+   a=0;b=1;c=0; #10
+   a=0;b=1;c=1; #10
+   a=1;b=0;c=0; #10
+   a=1;b=0;c=1; #10
+   a=1;b=1;c=0; #10
+   a=1;b=1;c=1; #10
+   $finish;
+   end
 endmodule
 ------------------------------------------------------------------------------------------------------------------------------
 // full adder using two half adder
 module full_addr(input a,b,c, output sum, carry);
-  half_adder h1(a,b,w1,w2);
-  half_adder h2(w1,c,sum,w3);
-  assign carry=w2|w3;
+   half_adder h1(a,b,w1,w2);
+   half_adder h2(w1,c,sum,w3);
+   assign carry=w2|w3;
 endmodule
 
 //define the testbench to satisfy design module is correctly working
 module tb3( );
-  reg a,b,c; wire sum,carry;
-  full_addr uut(a,b,c,sum,carry);
-initial
-begin
- for ( integer count = 0; count < 8; count = count + 1)
- begin
- {a, b, c}= count[2:0];
- #10;
- end
- $finish;
- end
+   reg a,b,c; wire sum,carry;
+   full_addr uut(a,b,c,sum,carry);
+   initial
+   begin
+    for ( integer count = 0; count < 8; count = count + 1)
+    begin
+    {a, b, c}= count[2:0];
+    #10;
+    end
+   $finish;
+  end
 endmodule
 
 --------------------------------------------------------------------------------------------------------------------------
