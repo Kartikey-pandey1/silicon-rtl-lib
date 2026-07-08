@@ -325,3 +325,86 @@ begin
 endmodule
 
 ---------------------------------------------------------------------------------------------------------------------------
+// Mux 8X1 using 2X1
+module x8(in, sel,out);
+  input [7:0] in;
+  input [2:0] sel;
+  output out;
+  x1_mux m1(in[0],in[1],sel[0],w1);
+  x1_mux m2(in[2],in[3],sel[0],w2);
+  x1_mux m3(in[0],in[1],sel[0],w3);
+  x1_mux m4(in[0],in[1],sel[0],w4);
+  x1_mux m5(w1,w2,sel[1],w5);
+  x1_mux m6(w1,w2,sel[1],w6);
+  x1_mux m7(w5,w6,sel[2],w7);
+endmodule
+// Testbench:
+module tb2(out);
+  reg [7:0] in;
+  reg [2:0] sel;
+  output out;
+  x8 dut(in,sel,out);
+  sel=8'b10101010;
+  sel=3'b000; #10
+  sel=3'b001; #10
+  sel=3'b010; #10
+  sel=3'b011; #10
+  sel=3'b100; #10
+  sel=3'b101; #10
+  sel=3'b110; #10
+  sel=3'b111; #10
+  $finish;
+  end
+endmodule
+
+//Demux(1X8)
+module 8xMux(in,en,sel,out);
+  input in,en;
+  input [2:0]sel;
+  output reg [7:0] out;
+  always @(*)
+    begin
+      out=8'b00000000;
+      if(en)
+        begin
+          case(sel)
+            3'b000: out[0]=in;
+            3'b001: out[1]=in;
+            3'b010: out[2]=in;
+            3'b011: out[3]=in;
+            3'b100: out[4]=in;
+            3'b100: out[5]=in;
+            3'b100: out[6]=in;
+            3'b100: out[7]=in;
+            default:out=8'b00000000;
+          endcase
+        end
+      else
+        out=8'b00000000;
+    end
+endmodule
+//Testbench
+module tb5(out);
+  reg in,en;
+  reg [2:0]sel;
+  output [7:0] out;
+  8xMux dut(in,en,sel,out);
+  initil
+  begin
+    in=1;en=1;
+    sel=3'b000,; #10
+    sel=3'b001,; #10
+    sel=3'b010,; #10
+    sel=3'b011,; #10
+    sel=3'b100,; #10
+    sel=3'b101,; #10
+    sel=3'b110,; #10
+    sel=3'b111,; #10
+    en=0; #10
+    en=1; #10
+    in=0; #10
+    in=1; #10
+    $finish;
+  end
+endmodule 
+-------------------------------------------------------------------------------------------------
